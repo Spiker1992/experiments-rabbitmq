@@ -1,4 +1,5 @@
 # Reference: https://www.rabbitmq.com/docs/publishers#amqp-0-9-1
+# Reference: https://www.rabbitmq.com/docs/confirms
 # Publisher sends a message to a RabbitMQ queue
 #
 # run `docker exec rabbitmq rabbitmqctl list_queues` to see messages in the queue
