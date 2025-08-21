@@ -1,23 +1,32 @@
-# 1882 messages sent, 1881.97 msg/sec (avg)
-# 3792 messages sent, 1895.81 msg/sec (avg)
-# 5593 messages sent, 1863.95 msg/sec (avg)
-# 7489 messages sent, 1871.91 msg/sec (avg)
-# 9314 messages sent, 1862.51 msg/sec (avg)
-# 11207 messages sent, 1867.54 msg/sec (avg)
-# 13090 messages sent, 1869.62 msg/sec (avg)
+
+# 909 messages sent, 908.69 msg/sec (avg)
+# 1831 messages sent, 915.28 msg/sec (avg)
+# 2720 messages sent, 902.36 msg/sec (avg)
+# 3641 messages sent, 905.97 msg/sec (avg)
+# 4490 messages sent, 893.01 msg/sec (avg)
+# 5424 messages sent, 899.73 msg/sec (avg)
+# 6331 messages sent, 900.40 msg/sec (avg)
+# 7253 messages sent, 903.07 msg/sec (avg)
+# 8168 messages sent, 904.36 msg/sec (avg)
+# 9002 messages sent, 897.31 msg/sec (avg)
+# 9840 messages sent, 891.90 msg/sec (avg)
 import pika
 import time
 
 # Hardcoded queue name
-QUEUE_NAME = "test_queue_with_acks_classic"
+QUEUE_NAME = "test_queue_with_acks_quorum"
 MESSAGE_COUNT = 100000
 
 # Connect to RabbitMQ (default localhost)
 connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channel = connection.channel()
 
-# Declare queue (non-durable, non-persistent)
-channel.queue_declare(queue=QUEUE_NAME, durable=True)
+ # Declare quorum queue
+channel.queue_declare(
+	queue=QUEUE_NAME,
+	durable=True,
+	arguments={"x-queue-type": "quorum"}
+)
 channel.confirm_delivery() # Enable publisher confirms - this will raise an exception if the message cannot be delivered
 # Start timer
 start_time = time.time()
