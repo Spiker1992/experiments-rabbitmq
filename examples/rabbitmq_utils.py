@@ -2,6 +2,7 @@ import time
 import pika
 
 DELIVERY_MODE_PERSISTENT = 2
+DELIVERY_MODE_TRANSIENT = 1
 
 def publish_bulk_messages(channel, queue_name, message_count, verbose=True):
     start_time = time.time()

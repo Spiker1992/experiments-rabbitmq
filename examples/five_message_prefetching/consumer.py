@@ -8,7 +8,7 @@ from examples.five_message_prefetching.constants import QUEUE_NAME
 def main():
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
     channel = connection.channel()
-    channel.basic_qos(prefetch_count=2)  
+    channel.basic_qos(prefetch_count=1)  
     channel.queue_declare(queue=QUEUE_NAME)
 
     def callback(ch, method, properties, body):
@@ -17,7 +17,9 @@ def main():
         print(f"Processing message for {delay:.2f} seconds...")
         time.sleep(delay)
 
-    channel.basic_consume(queue=QUEUE_NAME, on_message_callback=callback, auto_ack=True)
+        ch.basic_ack(delivery_tag=method.delivery_tag) # have to ack manually because of prefetch_count=1. Without this RabbitQKM will keep sending the same message over and over again.
+
+    channel.basic_consume(queue=QUEUE_NAME, on_message_callback=callback)
 
     print('Waiting for messages. To exit press CTRL+C')
     channel.start_consuming()
