@@ -1,0 +1,1 @@
+QUEUE_NAME = "deadletter_exchange_6"
