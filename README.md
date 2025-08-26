@@ -22,10 +22,10 @@ docker exec rabbitmq rabbitmqctl list_queues
 4. How RabbitMQ distributes messages
 5. What is prefetching?
 6. How does dead letter queue works?
+7. How can I retry processing a message?
 
 ## Things that will be added
 
-- [] How can I retry processing a message?
 - [] How message prioritisation works?
 - [] Can I delay a message delievery?
 - [] Can message confirms be non blocking?
