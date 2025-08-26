@@ -27,3 +27,12 @@ dlq     11
 ```
 
 Messages are now in the deadletter queue
+
+
+
+# Key things to note
+
+- we need to declare a dead letter exchange, a queue and bind queue to the exchange using a routing key.
+- when declaring a queue we need to define dead letter settings (exchange + routing key) via arguments
+- if routing key not used the queue name, where message failed, is used instead
+- when consuming messages we need to trigger a negative acknowledgement for message to be sent to a dead letter queue

@@ -1,7 +1,7 @@
 # Publisher sends a message to a RabbitMQ queue
 # run `docker exec rabbitmq rabbitmqctl list_queues` to see messages in the queue
 from examples.rabbitmq_utils import publish_bulk_messages
-from examples.deadletter_exchange_6.constants import QUEUE_NAME, channel
+from examples.deadletter_exchange_6.constants import QUEUE_NAME, channel, connection
 
 MESSAGE_COUNT = 10
 

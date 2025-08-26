@@ -4,13 +4,16 @@ QUEUE_NAME = "deadletter_exchange_6"
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
-channel.basic_qos(prefetch_count=1)  
 
-channel.exchange_declare(exchange='dlx')
-channel.queue_declare(queue='dlq')
-channel.queue_bind(exchange='dlx', queue='dlq', routing_key='dlq')
+# Declare dead letter exchange and dead letter queue
+channel.exchange_declare(exchange='dead_letter_exchange')
+channel.queue_declare(queue='dead_letter_queue')
+channel.queue_bind(exchange='dead_letter_exchange', queue='dead_letter_queue', routing_key=QUEUE_NAME)
 
+# we declare the main queue with dead letter exchange parameters
+# routing key is optional, if not provided the original routing key will be used
+# in our case the original routing key is QUEUE_NAME
 channel.queue_declare(queue=QUEUE_NAME, arguments={
-    "x-dead-letter-exchange": "dlx",
-    "x-dead-letter-routing-key": "dlq"
+    "x-dead-letter-exchange": "dead_letter_exchange",
+    # "x-dead-letter-routing-key": "my_routing_key"
 })
