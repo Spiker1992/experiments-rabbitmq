@@ -22,3 +22,8 @@ General recommendation is to not use priority queue. This functionality is avail
 Q: if we have only two modes, what impact of having a message with priority 0 vs priority 1? Will they be treated the same? 
 
 If we only have two modes then I expect for messages to be either normal or high. So in this case messages will be treated as equal.
+
+# Usage
+
+`python3 -m examples.priority_messages_9.quorum-publisher`
+`python3 -m examples.priority_messages_9.quorum-consumer`
