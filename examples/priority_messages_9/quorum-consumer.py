@@ -5,7 +5,7 @@ def main():
     def callback(ch, method, properties, body):
         print(f"Received {body.decode()}")
 
-    channel.basic_consume(queue=QUEUE_NAME_QUORUM, on_message_callback=callback)
+    channel.basic_consume(queue=QUEUE_NAME_QUORUM, on_message_callback=callback, auto_ack=True)
 
     print('Waiting for messages. To exit press CTRL+C')
     channel.start_consuming()

@@ -23,7 +23,8 @@ Q: if we have only two modes, what impact of having a message with priority 0 vs
 
 If we only have two modes then I expect for messages to be either normal or high. So in this case messages will be treated as equal.
 
-# Usage
+### Usage
 
 `python3 -m examples.priority_messages_9.quorum-publisher`
+`python3 -m examples.priority_messages_9.quorum-publisher-low-priority`
 `python3 -m examples.priority_messages_9.quorum-consumer`
