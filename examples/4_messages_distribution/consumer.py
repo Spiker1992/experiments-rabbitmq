@@ -1,9 +1,10 @@
 # Reference: https://www.rabbitmq.com/tutorials/tutorial-one-python
 # Consumer consumes any messages from the queue and prints them to the console.
 import pika, sys, os
+from config import RABBITMQ_HOST
 
 def main():
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST))
     channel = connection.channel()
 
     channel.queue_declare(queue='round_robbin')

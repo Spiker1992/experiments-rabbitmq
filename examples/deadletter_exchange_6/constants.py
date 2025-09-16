@@ -1,8 +1,9 @@
 import pika
+from config import RABBITMQ_HOST
 
 QUEUE_NAME = "deadletter_exchange_6"
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST))
 channel = connection.channel()
 
 # Declare dead letter exchange and dead letter queue

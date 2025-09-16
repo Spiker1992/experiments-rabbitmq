@@ -7,9 +7,10 @@
 #
 # After deleting the queue, messages are silently dropped
 import pika
+from config import RABBITMQ_HOST
 
 # Connect to RabbitMQ server
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST))
 channel = connection.channel()
 
 # Declare a queue

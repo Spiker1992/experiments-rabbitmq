@@ -7,10 +7,11 @@
 # After deleting the queue, by sending `delete_queue` message, new messages that you send
 # will fail loudly due to confirm delivery being enabled and mandatory set to True.
 import pika
+from config import RABBITMQ_HOST
 
 
 # Connect to RabbitMQ server
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST))
 channel = connection.channel()
 
 # Declare a queue

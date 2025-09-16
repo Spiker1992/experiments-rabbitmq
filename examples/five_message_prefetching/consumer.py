@@ -1,12 +1,13 @@
 # Reference: https://www.rabbitmq.com/tutorials/tutorial-one-python
 # Consumer consumes any messages from the queue and prints them to the console.
 import pika, sys, os
+from config import RABBITMQ_HOST
 import time
 import random
 from examples.five_message_prefetching.constants import QUEUE_NAME
 
 def main():
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST))
     channel = connection.channel()
     channel.basic_qos(prefetch_count=1)  
     channel.queue_declare(queue=QUEUE_NAME)

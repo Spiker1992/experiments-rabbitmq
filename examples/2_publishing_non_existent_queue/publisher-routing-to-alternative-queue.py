@@ -11,10 +11,11 @@
 #
 # NOTE: This way of defining an alternate exchange is discouraged. Consider using a policy instead
 import pika
+from config import RABBITMQ_HOST
 
 
 # Connect to RabbitMQ server
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST))
 channel = connection.channel()
 
 

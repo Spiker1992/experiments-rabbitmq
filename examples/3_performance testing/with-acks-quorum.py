@@ -11,6 +11,7 @@
 # 9002 messages sent, 897.31 msg/sec (avg)
 # 9840 messages sent, 891.90 msg/sec (avg)
 import pika
+from config import RABBITMQ_HOST
 import time
 
 # Hardcoded queue name
@@ -18,7 +19,7 @@ QUEUE_NAME = "test_queue_with_acks_quorum"
 MESSAGE_COUNT = 100000
 
 # Connect to RabbitMQ (default localhost)
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST))
 channel = connection.channel()
 
  # Declare quorum queue

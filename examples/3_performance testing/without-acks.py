@@ -9,6 +9,7 @@
 # 93982 messages sent, 10440.83 msg/sec (avg)
 # Sent 100000 messages to 'test_queue' in 9.5170 seconds (no acks)
 import pika
+from config import RABBITMQ_HOST
 import time
 
 # Hardcoded queue name
@@ -16,7 +17,7 @@ QUEUE_NAME = "test_queue"
 MESSAGE_COUNT = 100000
 
 # Connect to RabbitMQ (default localhost)
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST))
 channel = connection.channel()
 
 # Declare queue (non-durable, non-persistent)
