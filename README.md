@@ -5,8 +5,12 @@
 To run this project you will need access to Docker Desktop. 
 
 Once docker is installed and this repository is on your local machine, run the following commands to set things up:
-- Docker `docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management`
-- Packages `pip install -r requirements.txt
+- Docker `docker run -d --name rabbitmq -p 5552:5552 -p 5672:5672 -p 15672:15672 rabbitmq:management`
+- Enable Streaming `docker exec rabbitmq rabbitmq-plugins enable rabbitmq_stream rabbitmq_stream_management`
+- Enable Managment UI `docker exec rabbitmq rabbitmq-plugins enable rabbitmq_management`
+- Packages `pip install -r requirements.txt`
+
+
 
 ## Example Running command against RabbitMQ
 
@@ -23,10 +27,10 @@ docker exec rabbitmq rabbitmqctl list_queues
 5. What is prefetching?
 6. How does dead letter queue works?
 7. How can I retry processing a message?
+8. How message prioritisation works?
 
 ## Things that will be added
 
-- [] How message prioritisation works?
 - [] Can I delay a message delievery?
 - [] Can message confirms be non blocking?
 - [] How message persistance works?
