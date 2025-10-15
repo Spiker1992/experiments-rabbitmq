@@ -16,13 +16,15 @@ channel = connection.channel()
 
 # https://www.rabbitmq.com/docs/streams#declaring
 channel.queue_declare(queue=STREAM_NAME, durable=True, exclusive=False, auto_delete=False, arguments={"x-queue-type": "stream"})
-channel.exchange_declare(exchange='dead_letter_exchange', exchange_type='topic')
-channel.queue_bind(queue=STREAM_NAME, exchange='dead_letter_exchange', routing_key="*")
+channel.exchange_declare(exchange='dead_letter_exchange', exchange_type='fanout')
+channel.queue_bind(queue=STREAM_NAME, exchange='dead_letter_exchange')
 
 # Create a queue
-channel.queue_declare(queue=QUEUE_NAME_QUORUM, 
-durable=True, 
-arguments={
-    "x-queue-type": "quorum",
-    "x-dead-letter-exchange": "dead_letter_exchange"
-})
+channel.queue_declare(
+    queue=QUEUE_NAME_QUORUM, 
+    durable=True, 
+    arguments={
+        "x-queue-type": "quorum",
+        "x-dead-letter-exchange": "dead_letter_exchange"
+    }
+)
